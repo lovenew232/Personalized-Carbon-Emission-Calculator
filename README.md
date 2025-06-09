@@ -8,8 +8,8 @@ A Streamlit-based interactive web app that helps users estimate their personal c
 ```bash
 Personalized-Carbon-Emission-Calculator/
 │
-├── app.py             # Main Streamlit application
-└── req.txt            # Required Python libraries
+├── app.py               # Main Streamlit application
+└── requirements.txt     # Required Python libraries
 ```
 ---
 
