@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Carbon Calculator ⚠️</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Personalized Carbon Emission Calculator ⚠️</h1>
+            <p>Calculate and reduce your environmental impact</p>
+        </div>
+
+        <div class="main-content">
+            <!-- Country Selection -->
+            <div class="section">
+                <h2>🌍 Your Country</h2>
+                <select id="country" class="input-field">
+                    <option value="India">India</option>
+                </select>
+            </div>
+
+            <!-- Input Section -->
+            <div class="section">
+                <h2>📊 Your Daily Activities</h2>
+                <div class="input-grid">
+                    <div class="input-group">
+                        <h3>🚗 Daily Travel Distance</h3>
+                        <div class="slider-container">
+                            <input type="range" id="distance" class="slider" min="0" max="100" value="0" step="0.1">
+                            <div class="slider-value"><span id="distanceValue">0</span> km/day</div>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <h3>💡 Monthly Electricity Consumption</h3>
+                        <div class="slider-container">
+                            <input type="range" id="electricity" class="slider" min="0" max="1000" value="0" step="1">
+                            <div class="slider-value"><span id="electricityValue">0</span> kWh/month</div>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <h3>🗑️ Weekly Waste Generated</h3>
+                        <div class="slider-container">
+                            <input type="range" id="waste" class="slider" min="0" max="100" value="0" step="0.1">
+                            <div class="slider-value"><span id="wasteValue">0</span> kg/week</div>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <h3>🍽️ Daily Meals Consumed</h3>
+                        <input type="number" id="meals" class="input-field" min="0" max="10" value="0" placeholder="Number of meals per day">
+                    </div>
+                </div>
+
+                <button class="calculate-btn" onclick="calculateEmissions()">Calculate CO2 Emissions</button>
+            </div>
+
+            <!-- Results Section -->
+            <div id="results" class="results section">
+                <h2>📈 Results</h2>
+                
+                <div class="results-grid">
+                    <div class="result-card">
+                        <h4>🚗 Transportation</h4>
+                        <div class="result-value" id="transportResult">0 tonnes CO2/year</div>
+                    </div>
+                    <div class="result-card">
+                        <h4>💡 Electricity</h4>
+                        <div class="result-value" id="electricityResult">0 tonnes CO2/year</div>
+                    </div>
+                    <div class="result-card">
+                        <h4>🍽️ Diet</h4>
+                        <div class="result-value" id="dietResult">0 tonnes CO2/year</div>
+                    </div>
+                    <div class="result-card">
+                        <h4>🗑️ Waste</h4>
+                        <div class="result-value" id="wasteResult">0 tonnes CO2/year</div>
+                    </div>
+                </div>
+
+                <div class="total-emissions">
+                    <h3>🌍 Your Total Carbon Footprint</h3>
+                    <div class="value" id="totalEmissions">0 tonnes CO2/year</div>
+                    <p>India's average: 1.89 tonnes CO2 per person (2022)</p>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="emissionsChart" width="400" height="400"></canvas>
+                </div>
+
+                <div id="insights" class="insights">
+                    <h3>💡 Insights & Recommendations</h3>
+                    <div id="insightContent"></div>
+                </div>
+            </div>
+
+            <!-- Chatbot Section -->
+            <div class="section chatbot-section">
+                <h2>🤖 Carbon Reduction Assistant</h2>
+                <p>Ask me anything about reducing your carbon footprint! I can help with tips, strategies, and personalized advice.</p>
+
+                <div class="api-key-input">
+                    <input type="password" id="apiKey" class="input-field" placeholder="Enter your Google Gemini API Key">
+                    <button class="send-btn" onclick="configureAPI()">Configure API</button>
+                    <div class="info">
+                        <strong>How to get your Gemini API key:</strong><br>
+                        1. Visit <a href="https://makersuite.google.com/app/apikey" target="_blank">Google AI Studio</a><br>
+                        2. Sign in with your Google account<br>
+                        3. Click 'Create API Key'<br>
+                        4. Copy and paste the key above
+                    </div>
+                </div>
+
+                <div id="chatInterface" style="display: none;">
+                    <div class="chat-container" id="chatContainer">
+                        <!-- Chat messages will appear here -->
+                    </div>
+
+                    <div class="chat-input-container">
+                        <input type="text" id="chatInput" class="chat-input" placeholder="Ask your carbon footprint question...">
+                        <button class="send-btn" onclick="sendMessage()">Send</button>
+                        <button class="send-btn" onclick="clearChat()" style="background: #f44336;">Clear</button>
+                    </div>
+
+                    <div class="loading" id="loading">
+                        <div class="spinner"></div>Thinking...
+                    </div>
+
+                    <h3>💡 Quick Questions</h3>
+                    <div class="quick-questions">
+                        <button class="quick-btn" onclick="askQuickQuestion('What are the best ways to reduce my transportation carbon emissions?')">
+                            Reduce Transportation Emissions
+                        </button>
+                        <button class="quick-btn" onclick="askQuickQuestion('How can I reduce my electricity consumption and carbon footprint at home?')">
+                            Save Energy at Home
+                        </button>
+                        <button class="quick-btn" onclick="askQuickQuestion('What dietary changes can help me reduce my carbon footprint?')">
+                            Sustainable Diet Tips
+                        </button>
+                    </div>
+                </div>
+
+                <div class="sample-questions">
+                    <h3>❓ Example Questions You Can Ask</h3>
+                    <ul>
+                        <li>What's the most effective way to reduce my carbon footprint?</li>
+                        <li>How can I make my daily commute more sustainable?</li>
+                        <li>What are some eco-friendly alternatives for my high electricity usage?</li>
+                        <li>How does my diet impact my carbon emissions?</li>
+                        <li>What are some zero-waste practices I can adopt?</li>
+                        <li>How can I offset my carbon emissions?</li>
+                        <li>What renewable energy options are available for homes?</li>
+                        <li>How can I reduce food waste and its environmental impact?</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
