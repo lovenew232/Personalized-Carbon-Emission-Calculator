@@ -1,6 +1,6 @@
-# 🌍 Personalized Carbon Emission Calculator
+# 🌍 Personalized Carbon Emission Calculator 
 
-A Streamlit-based interactive web app that helps users estimate their personal carbon emissions across four major lifestyle categories and provides actionable insights to reduce their footprint. This tool also includes a **chatbot powered by Google Gemini** that answers user queries related to sustainability and emissions reduction.
+An interactive web application built using HTML, CSS, and JavaScript that helps users estimate their personal carbon emissions across four key lifestyle categories. This tool provides visual insights through a pie chart and suggests practical tips for reducing one's carbon footprint—all running directly in your browser without any server or backend.
 
 ---
 ## 📁 Folder Structure
@@ -8,44 +8,48 @@ A Streamlit-based interactive web app that helps users estimate their personal c
 ```bash
 Personalized-Carbon-Emission-Calculator/
 │
-├── app.py               # Main Streamlit application
-└── requirements.txt     # Required Python libraries
+├── index.html     # Main web page
+├── style.css      # Styling for layout and visuals
+└── script.js      # Logic for emission calculation and pie chart rendering
 ```
 ---
-
 ## 🔍 Features
 
-- 🔢 **Category-wise Emission Calculation**  
-  Calculates your annual CO₂ emissions based on:
-  - 🚗 **Transportation** (km/day)
-  - 💡 **Electricity Usage** (kWh/month)
-  - 🍽️ **Diet** (meals/day)
-  - 🗑️ **Waste** (kg/week)
+  - 🔢 **Category-wise Emission Calculator**
+    Estimates annual CO₂ emissions based on:
 
-- 📊 **Visual Insights**  
-  Generates a **dynamic pie chart** showing the proportion of your carbon footprint from each category.
+    - 🚗 **Transportation** (km/day)
+    - 💡 **Electricity Usage** (kWh/month)
+    - 🍽️ **Diet** (meals/day)
+    - 🗑️ **Waste** (kg/week)
 
-- 🤖 **Carbon Reduction Chatbot**  
-  Integrated chatbot using **Google Gemini API**:
+  - 📊 **Live Visual Insights**
+      Generates a dynamic pie chart using the input data
+      Displays total carbon footprint in tonnes per year
+
+  - 🤖 **Carbon Reduction Chatbot**  
+    Integrated chatbot using **Google Gemini API**:
   - Provides tailored advice based on your inputs
   - Only answers questions about sustainability, emissions, green practices, etc.
 
 ---
-
 ## 🚀 How It Works
+ 
+ 1. Open index.html in any modern browser.
+ 
+ 2. Enter your:
+  - Daily distance traveled (km)
+  - Monthly electricity usage (kWh)
+  - Weekly waste generated (kg)
+  - Number of daily meals (avg.)
+ 
+ 3. Click “Calculate Emissions”.
 
-1. Select your country (currently supports **India**).
-2. Enter your lifestyle data:
-   - Daily travel in km
-   - Monthly electricity usage
-   - Weekly waste generation
-   - Daily meals
-3. The app:
-   - Converts inputs to yearly values
-   - Calculates category-wise emissions
-   - Displays totals in **tonnes/year**
-4. Chat with the **Gemini-powered assistant** for improvement strategies.
-
+ 4. The app:
+    - Converts inputs to yearly emissions
+    - Calculates per-category and total carbon footprint
+    - Renders a pie chart visualizing the breakdown
+    - Displays relevant eco-friendly tips for each input category
 ---
 
 ## 💬 Chatbot with Google Gemini
@@ -60,22 +64,11 @@ Personalized-Carbon-Emission-Calculator/
 
 ---
 
-## 📦 Installation
-
-```bash
-- git clone https://github.com/yourusername/Personalized-Carbon-Emission-Calculator.git
-  cd Personalized-Carbon-Emission-Calculator
-
-- pip install streamlit plotly pandas google-generativeai
-```
----
-
-## 📈 Future Improvements
-
-  - Support for more countries and emission factors
-  - Export report as PDF
-  - Integration with real-time energy footprint APIs
-  - Save and compare history of footprints
+## 💡 Future Improvements
+ - Add ability to export the chart and summary as PDF
+ - Support for different countries' emission factors
+ - Allow users to save and compare historical data (via localStorage)
+ - Improve tips with collapsible sections or tooltips
 
 ---
 
